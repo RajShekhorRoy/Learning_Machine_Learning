@@ -10,10 +10,8 @@ initial_c = 0
 
 
 # EQUATION = a + b * x + c * x ** 2
-# DIFFERENTIAL_EQUATION = b + 2 * C * x
 def gradient_descent_runner(_a, _b, _c, _x_array, _y_array):
     cost = 0.0
-    i = 0
     a = _a
     b = _b
     c = _c
@@ -24,8 +22,6 @@ def gradient_descent_runner(_a, _b, _c, _x_array, _y_array):
 
 
 def gradient_descent_step(_a, _b, _c, _x_array, _y_array, _output_y):
-    cost = 0.0
-    i = 0
     a_gradient = 0
     b_gradient = 0
     c_gradient = 0
@@ -40,7 +36,7 @@ def gradient_descent_step(_a, _b, _c, _x_array, _y_array, _output_y):
         c_gradient += (2 / length) * cost * (-2 * x)
 
         i = i + 1
-    print('a_gradient ' + str(a_gradient) + ' b_gradient ' + str(b_gradient) + ' c_gradient ' + str(c_gradient))
+    # print('a_gradient ' + str(a_gradient) + ' b_gradient ' + str(b_gradient) + ' c_gradient ' + str(c_gradient))
     # update values
     new_a = _a - LEARNING_RATE * a_gradient
     new_b = _b - LEARNING_RATE * b_gradient
@@ -61,9 +57,11 @@ def accuracy(_a, _b, _c, _x_array, _y_array):
     total_accuracy = 0
     for x in _x_array:
         val = (float(_a + _b * x + _c * (x ** 2))) / _y_array[i]
+        per =(1 -(val/_y_array[i]))
+        print(per)
+        total_accuracy += per
         i = i + 1
-        total_accuracy += (100 * val) / len(_x_array)
-    return total_accuracy
+    return abs(100*total_accuracy/len(_x_array))
 
 
 datas = pd.read_csv('/home/rajroy/Desktop/sample_assisgnment.csv', delimiter=',')
@@ -77,7 +75,7 @@ a, b, c = gradient_descent_runner(initial_a, initial_b, initial_c, x, y)
 
 print(accuracy(a, b, c, x, y))
 
-plt.scatter(x,y, color='blue')
+plt.scatter(x, y, color='blue')
 
 plt.plot(x, predict(a, b, c, x), color='red')
 
