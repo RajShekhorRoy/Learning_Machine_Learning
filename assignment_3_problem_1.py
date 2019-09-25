@@ -11,17 +11,17 @@ initial_c = 0
 
 # EQUATION = a + b * x + c * x ** 2
 def gradient_descent_runner(_a, _b, _c, _x_array, _y_array):
-    cost = 0.0
+
     a = _a
     b = _b
     c = _c
 
     for x in range(0, ITERATION):
-        a, b, c = gradient_descent_step(a, b, c, _x_array, _y_array, cost)
+        a, b, c = gradient_descent_step(a, b, c, _x_array, _y_array)
     return [a, b, c]
 
 
-def gradient_descent_step(_a, _b, _c, _x_array, _y_array, _output_y):
+def gradient_descent_step(_a, _b, _c, _x_array, _y_array):
     a_gradient = 0
     b_gradient = 0
     c_gradient = 0
