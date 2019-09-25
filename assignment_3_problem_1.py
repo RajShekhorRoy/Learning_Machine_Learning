@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 LEARNING_RATE = 0.0001
 
-ITERATION = 10000
+ITERATION = 1000
 initial_a = 0
 initial_b = 0
 initial_c = 0
@@ -31,6 +31,9 @@ def gradient_descent_step(_a, _b, _c, _x_array, _y_array):
     # find gradient of the cost function
     for x in _x_array:
         cost = (-float(_a + _b * x + _c * x ** 2) + float(_y_array[i]))
+        print('cost ' + str(cost))
+        cost = cost*cost
+        print('cost '+str(cost))
         a_gradient += (2 / length) * cost * (-1)
         b_gradient += (2 / length) * cost * (-x)
         c_gradient += (2 / length) * cost * (-2 * x)
@@ -58,7 +61,7 @@ def accuracy(_a, _b, _c, _x_array, _y_array):
     for x in _x_array:
         val = (float(_a + _b * x + _c * (x ** 2))) / _y_array[i]
         per =(1 -(val/_y_array[i]))
-        print(per)
+        # print(per)
         total_accuracy += per
         i = i + 1
     return abs(100*total_accuracy/len(_x_array))
