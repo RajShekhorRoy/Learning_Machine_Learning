@@ -11,7 +11,6 @@ initial_c = 0
 
 # EQUATION = a + b * x + c * x ** 2
 def gradient_descent_runner(_a, _b, _c, _x_array, _y_array):
-
     a = _a
     b = _b
     c = _c
@@ -31,9 +30,7 @@ def gradient_descent_step(_a, _b, _c, _x_array, _y_array):
     # find gradient of the cost function
     for x in _x_array:
         cost = (-float(_a + _b * x + _c * x ** 2) + float(_y_array[i]))
-        print('cost ' + str(cost))
-        cost = cost*cost
-        print('cost '+str(cost))
+        cost = cost * cost
         a_gradient += (2 / length) * cost * (-1)
         b_gradient += (2 / length) * cost * (-x)
         c_gradient += (2 / length) * cost * (-2 * x)
@@ -60,11 +57,11 @@ def accuracy(_a, _b, _c, _x_array, _y_array):
     total_accuracy = 0
     for x in _x_array:
         val = (float(_a + _b * x + _c * (x ** 2))) / _y_array[i]
-        per =(1 -(val/_y_array[i]))
+        per = (1 - (val / _y_array[i]))
         # print(per)
         total_accuracy += per
         i = i + 1
-    return abs(100*total_accuracy/len(_x_array))
+    return round(abs(100 * total_accuracy / len(_x_array)), 2)
 
 
 datas = pd.read_csv('/home/rajroy/Desktop/sample_assisgnment.csv', delimiter=',')
@@ -76,7 +73,7 @@ print(y)
 a, b, c = 0, 0, 0
 a, b, c = gradient_descent_runner(initial_a, initial_b, initial_c, x, y)
 
-print(accuracy(a, b, c, x, y))
+print('Accuracy is : ' + str(accuracy(a, b, c, x, y)) + ' %')
 
 plt.scatter(x, y, color='blue')
 
